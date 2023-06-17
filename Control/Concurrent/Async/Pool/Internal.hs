@@ -170,7 +170,7 @@ mapTasksWorker :: Traversable t
                -> IO (t c)
 mapTasksWorker p fs f g = do
     hs <- forM fs $ atomically . asyncUsingLazy p rawForkIO
-    extraWorkerWhileBlocked p $ f $ forM hs g
+    f $ forM hs g
 
 -- | Execute a group of tasks within the given task group, returning the
 --   results in order.  The order of execution is random, but the results are
